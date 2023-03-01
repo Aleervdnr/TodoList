@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react'
-import { Circle, TaskWrapper } from './TaskListCSS'
+import { Circle, Remove, TaskWrapper } from './TaskListCSS'
 import { BsCheck2 } from 'react-icons/bs';
 
-export default function TaskItem({data}) {
+export default function TaskItem({data,removeTask,id}) {
 
   const [completado, setCompletado] = useState(false)
 
@@ -28,7 +28,7 @@ export default function TaskItem({data}) {
   }
 
   return (
-    <TaskWrapper onClick={handleOnClick}>
+    <TaskWrapper id={id} onClick={handleOnClick}>
       {completado?
         <Circle completado>
           <BsCheck2/>
@@ -39,6 +39,7 @@ export default function TaskItem({data}) {
       <span style={completado?{opacity:"0.5"}: null} >
         {data.input}
       </span>
+      <Remove onClick={removeTask}>x</Remove>
     </TaskWrapper>
   )
 }

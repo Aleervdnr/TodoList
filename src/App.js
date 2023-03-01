@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react'
 import './App.css';
-import { ContainerWrapper } from './Componentes/Container/ContainerCSS';
+import { ContainerWrapper, SemiCircle } from './Componentes/Container/ContainerCSS';
 import FormTodo from './Componentes/FormTodo/FormTodo';
+import Header from './Componentes/Header/Header';
 import TaskList from './Componentes/TaksList/TaskList';
 import { GlobalStyle } from './Componentes/UtilityClasses';
 
@@ -18,10 +19,17 @@ function App() {
     window.localStorage.setItem('myTasks',JSON.stringify(nuevasTareas))
   }
 
-  const handleRemoveTask = () =>{
+  const handleRemoveTasks = () =>{
     setTareas([])
     window.localStorage.setItem('myTasks',JSON.stringify([]))
     setLastId(0)
+  }
+
+  const handleRemoveTask = (e) =>{
+    console.log(e.target.parentElement.id)
+    const filtro = tareas.filter(el => el.id != e.target.parentElement.id)
+    setTareas(filtro)
+    window.localStorage.setItem('myTasks',JSON.stringify(filtro))
   }
 
   useEffect(()=>{
@@ -45,6 +53,8 @@ function App() {
     <div className="App">
       <GlobalStyle/>
       <ContainerWrapper>
+        <SemiCircle/>
+        <Header/>
         <h2>Tareas</h2>
         <FormTodo 
           handleAddItem={handleAddItem} 
@@ -54,7 +64,8 @@ function App() {
           tareas={tareas} 
           setTareas={setTareas} 
           setLastId={setLastId}
-          remove={handleRemoveTask}
+          removeAll={handleRemoveTasks}
+          removeTask = {handleRemoveTask}
           />
       </ContainerWrapper>
     </div>

@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const FormTodoWrapper = styled.form`
 height: 45px;
+margin: 10px 0;
 `
 
 export const FormTodoInput = styled.input`

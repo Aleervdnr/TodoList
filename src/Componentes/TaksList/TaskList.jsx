@@ -2,12 +2,12 @@ import React from 'react'
 import TaskItem from './TaskItem'
 import {DeleteAllButton, TaskListNone, TaskListWrapper } from './TaskListCSS'
 
-export default function TaskList({tareas, setTareas, setLastId, remove, habito}) {
+export default function TaskList({tareas, setTareas, setLastId, removeAll, removeTask, habito}) {
 
   return (
     <TaskListWrapper>
       {tareas.length ?
-        tareas.map(tarea => <TaskItem key={tarea.id} data={tarea}/>)
+        tareas.map(tarea => <TaskItem id={tarea.id} key={tarea.id} data={tarea} removeTask={removeTask} />)
         :
         <TaskListNone>No hay tareas</TaskListNone>
       }
@@ -17,7 +17,7 @@ export default function TaskList({tareas, setTareas, setLastId, remove, habito})
           null
         :
         tareas.length ?
-        <DeleteAllButton onClick={remove}>Borrar Tareas</DeleteAllButton>
+        <DeleteAllButton onClick={removeAll}>Borrar Tareas</DeleteAllButton>
         :
         null
       }

@@ -27,7 +27,9 @@ export const DeleteAllButton = styled.button`
 export const TaskWrapper = styled.li`
   list-style: none;
   padding: 10px;
-  display: flex;
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 20px 200px 20px;
   align-items: center;
   text-transform: capitalize;
   width: 100%;
@@ -56,3 +58,12 @@ export const Circle = styled.div`
 			`}
 `
 
+export const Remove = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  color: white;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+`

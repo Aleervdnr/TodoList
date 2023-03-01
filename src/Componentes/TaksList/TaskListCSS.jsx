@@ -25,6 +25,7 @@ export const DeleteAllButton = styled.button`
 
 //item
 export const TaskWrapper = styled.li`
+  height: 45px;
   list-style: none;
   padding: 10px;
   display: grid;

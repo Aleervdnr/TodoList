@@ -36,11 +36,11 @@ export default function TaskItem({data,removeTask,id}) {
       :
         <Circle/>
       }
-      <span style={completado?{opacity:"0.5"}: null} >
+      <span style={completado?{opacity:"0.5",textDecoration:"line-through"}: null} >
         {data.input}
       </span>
       <Remove >
-        <BsTrash onClick={removeTask}/>
+        <BsTrash onClick={removeTask} style={{cursor:"pointer"}} />
       </Remove>
     </TaskWrapper>
   )

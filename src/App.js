@@ -55,7 +55,7 @@ function App() {
       <ContainerWrapper>
         <SemiCircle/>
         <Header/>
-        <h2>Tareas</h2>
+        <h2>GTD</h2>
         <FormTodo 
           handleAddItem={handleAddItem} 
           lastId={lastId} 

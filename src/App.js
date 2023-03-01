@@ -26,8 +26,8 @@ function App() {
   }
 
   const handleRemoveTask = (e) =>{
-    console.log(e.target.parentElement.id)
-    const filtro = tareas.filter(el => el.id != e.target.parentElement.id)
+    console.log(e.target.parentElement.parentElement.id)
+    const filtro = tareas.filter(el => el.id != e.target.parentElement.parentElement.id)
     setTareas(filtro)
     window.localStorage.setItem('myTasks',JSON.stringify(filtro))
   }

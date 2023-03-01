@@ -59,11 +59,9 @@ export const Circle = styled.div`
 `
 
 export const Remove = styled.div`
+  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
-  color: white;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  color: gray;
 `

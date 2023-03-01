@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { Circle, Remove, TaskWrapper } from './TaskListCSS'
-import { BsCheck2 } from 'react-icons/bs';
+import { BsCheck2,BsTrash } from 'react-icons/bs';
 
 export default function TaskItem({data,removeTask,id}) {
 
@@ -39,7 +39,9 @@ export default function TaskItem({data,removeTask,id}) {
       <span style={completado?{opacity:"0.5"}: null} >
         {data.input}
       </span>
-      <Remove onClick={removeTask}>x</Remove>
+      <Remove >
+        <BsTrash onClick={removeTask}/>
+      </Remove>
     </TaskWrapper>
   )
 }

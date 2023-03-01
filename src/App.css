@@ -5,3 +5,8 @@
     display: flex;
   }
 }
+
+html{
+  width: 100vw;
+  overflow: hidden;
+}

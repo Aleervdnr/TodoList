@@ -16,9 +16,9 @@ export default function TaskItem({data,removeTask,id,setTareas}) {
   }, [])
 
   const handleClick = (e) => {
-    console.log(e.target)
+    console.log(e.target.parentElement)
 
-    if(e.target.id == data.id){
+    if(e.target.matches(`#item${data.id}`) || e.target.matches(`#item${data.id} *`) && e.target.id !== `remove${data.id}` && !e.target.matches(`#remove${data.id} *`) ){
 
         setCompletado(!completado)
         let localTareas = JSON.parse(window.localStorage.getItem('myTasks'))
@@ -29,7 +29,12 @@ export default function TaskItem({data,removeTask,id,setTareas}) {
         })
         window.localStorage.setItem('myTasks',JSON.stringify(localTareas))
         setTareas(localTareas)
-      }
+    }
+
+    if(e.target.matches(`#remove${data.id}`) || e.target.matches(`#remove${data.id} *`)){
+      console.log("borrado")
+      removeTask(data.id)
+    }
   }
 
  useEffect(() => {
@@ -44,7 +49,8 @@ export default function TaskItem({data,removeTask,id,setTareas}) {
 
 
   return (
-    <TaskWrapper id={id} >
+    <>
+    <TaskWrapper id={`item${data.id}`} >
       {completado?
         <Circle completado>
           <BsCheck2/>
@@ -55,9 +61,10 @@ export default function TaskItem({data,removeTask,id,setTareas}) {
       <span style={completado?{opacity:"0.5",textDecoration:"line-through"}: null} >
         {data.input}
       </span>
-      <Remove >
-        <BsTrash onClick={removeTask} style={{cursor:"pointer"}} />
-      </Remove>
     </TaskWrapper>
+    <Remove id={`remove${data.id}`} >
+      <BsTrash style={{cursor:"pointer"}} />
+    </Remove>
+    </>
   )
 }

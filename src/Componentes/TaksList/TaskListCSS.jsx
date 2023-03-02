@@ -30,11 +30,10 @@ export const TaskWrapper = styled.li`
   padding: 10px;
   display: grid;
   gap: 5px;
-  grid-template-columns: 20px 200px 20px;
+  grid-template-columns: 20px 1fr 20px;
   align-items: center;
   text-transform: capitalize;
   width: 100%;
-  margin-left: 15px;
 
   & span{
     transition: opacity 1s;

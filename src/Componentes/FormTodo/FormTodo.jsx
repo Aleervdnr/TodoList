@@ -9,6 +9,7 @@ export default function FormTodo({handleAddItem,lastId, setLastId}) {
     e.preventDefault()
     handleAddItem({
       completado: false,
+      accionar:false,
       id: lastId + 1,
       input
     })

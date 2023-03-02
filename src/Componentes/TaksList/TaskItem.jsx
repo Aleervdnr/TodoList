@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { Circle, Remove, TaskWrapper } from './TaskListCSS'
 import { BsCheck2,BsTrash } from 'react-icons/bs';
 
-export default function TaskItem({data,removeTask,id}) {
+export default function TaskItem({data,removeTask,id,setTareas}) {
 
   const [completado, setCompletado] = useState(false)
 
@@ -14,21 +14,37 @@ export default function TaskItem({data,removeTask,id}) {
       }
     })
   }, [])
-  
 
-  const handleOnClick = () =>{
-    setCompletado(!completado)
-    let localTareas = JSON.parse(window.localStorage.getItem('myTasks'))
-    localTareas.map((tarea)=>{
-      if(tarea.id == data.id){
-        tarea.completado = !tarea.completado
+  const handleClick = (e) => {
+    console.log(e.target)
+
+    if(e.target.id == data.id){
+
+        setCompletado(!completado)
+        let localTareas = JSON.parse(window.localStorage.getItem('myTasks'))
+        localTareas.map((tarea)=>{
+          if(tarea.id == data.id){
+            tarea.completado = !tarea.completado
+          }
+        })
+        window.localStorage.setItem('myTasks',JSON.stringify(localTareas))
+        setTareas(localTareas)
       }
-    })
-    window.localStorage.setItem('myTasks',JSON.stringify(localTareas))
   }
 
+ useEffect(() => {
+   document.addEventListener("click",handleClick)
+  
+   return () => {
+     document.removeEventListener("click",handleClick)
+   }
+ }, [])
+  
+
+
+
   return (
-    <TaskWrapper id={id} onClick={handleOnClick}>
+    <TaskWrapper id={id} >
       {completado?
         <Circle completado>
           <BsCheck2/>

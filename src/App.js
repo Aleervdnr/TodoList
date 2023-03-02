@@ -3,15 +3,16 @@ import './App.css';
 import { ContainerWrapper, SemiCircle } from './Componentes/Container/ContainerCSS';
 import FormTodo from './Componentes/FormTodo/FormTodo';
 import Header from './Componentes/Header/Header';
-import TaskList from './Componentes/TaksList/TaskList';
-import { GlobalStyle } from './Componentes/UtilityClasses';
+import InboxTask from "./Componentes/InboxTask/InboxTask"
+import ActionTask from "./Componentes/ActionTask/ActionTask"
+import CompletedTask from "./Componentes/CompletedTask/CompletedTask"
+import { GlobalStyle, TasksGrid } from './Componentes/UtilityClasses';
 
 function App() {
 
   const [lastId, setLastId] = useState(JSON.parse(window.localStorage.getItem('myTasks')) ? JSON.parse(window.localStorage.getItem('myTasks')).length : 0)
   const [tareas, setTareas] = useState([])
-
-  const [habitos, setHabitos] = useState([])
+  const [inbox, setInbox] = useState([])
 
   const handleAddItem = (tareaNueva) =>{
     const nuevasTareas = [...tareas, tareaNueva]
@@ -26,7 +27,6 @@ function App() {
   }
 
   const handleRemoveTask = (e) =>{
-    console.log(e.target.parentElement.parentElement.id)
     const filtro = tareas.filter(el => el.id != e.target.parentElement.parentElement.id)
     setTareas(filtro)
     window.localStorage.setItem('myTasks',JSON.stringify(filtro))
@@ -37,17 +37,13 @@ function App() {
     if(myLocalTasks != null){
       setTareas(myLocalTasks);
     }
-    },[])
-
-    //Habitos
-    const handleAddHabit = (habitoNuevo) =>{
-      const nuevosHabitos = [...habitos, habitoNuevo]
-      setHabitos(nuevosHabitos)
-      console.log(habitos)
-    }
+   },[])
 
 
 
+  // useEffect(() => {
+  //     window.localStorage.setItem('myTasks',JSON.stringify(tareas))
+  // },[tareas])
 
   return (
     <div className="App">
@@ -60,13 +56,19 @@ function App() {
           handleAddItem={handleAddItem} 
           lastId={lastId} 
           setLastId={setLastId} />
-        <TaskList 
+
+          <TasksGrid>            
+            <InboxTask tareas={tareas} removeTask={handleRemoveTask} setTareas={setTareas} />
+            <ActionTask tareas={tareas} removeTask={handleRemoveTask} />
+            <CompletedTask tareas={tareas} removeTask={handleRemoveTask} setTareas={setTareas} />
+          </TasksGrid>
+        {/* <TaskList 
           tareas={tareas} 
           setTareas={setTareas} 
           setLastId={setLastId}
           removeAll={handleRemoveTasks}
           removeTask = {handleRemoveTask}
-          />
+          /> */}
       </ContainerWrapper>
     </div>
   );

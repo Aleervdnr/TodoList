@@ -39,3 +39,23 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 `
+
+export const TasksGrid = styled.div`
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(250px,1fr));
+  justify-items: center;
+  gap: 25px;
+`
+
+export const TasksWrapper = styled.div`
+  width: 100%;
+  min-height: 150px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+`
+
+export const TasksWrapperTitle = styled.h2`
+  color: var(--verde);
+  text-align: center;
+`
